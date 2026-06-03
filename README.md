@@ -1,4 +1,3 @@
-# U-INSPIRE-Project-
 # Blogr — Landing Page
 A modern, fully responsive landing page for Blogr, a publishing platform for writers and creators. Built with semantic HTML5, vanilla CSS (ITCSS architecture), and vanilla JavaScript — zero dependencies, no build tools required.
 
