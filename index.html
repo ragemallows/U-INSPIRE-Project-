@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Blogr — A modern publishing platform. Grow your audience and build your online brand." />
+    <meta name="theme-color" content="#FF525D" />
+
+    <title>Blogr — A Modern Publishing Platform</title>
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;600;700&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS Architecture: base → layout → components → utilities -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+
+  <body>
+    <!-- ===================== LOADER ===================== -->
+    <div class="page-loader" id="pageLoader" role="status" aria-label="Loading page">
+      <div class="page-loader__inner">
+        <div class="page-loader__logo" aria-hidden="true">Blogr</div>
+        <div class="page-loader__bar">
+          <div class="page-loader__progress"></div>
+        </div>
+        <p class="page-loader__text">Preparing your experience…</p>
+      </div>
+    </div>
+
+    <!-- ===================== SKIP LINK (Accessibility) ===================== -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- ===================== HEADER / NAV ===================== -->
+    <header class="site-header" role="banner">
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#" class="nav__logo" aria-label="Blogr home">Blogr</a>
+
+        <!-- Desktop nav links -->
+        <ul class="nav__list" role="list">
+          <li class="nav__item nav__item--dropdown">
+            <button
+              class="nav__trigger"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="dropdown-product"
+            >
+              Product
+              <svg class="nav__chevron" aria-hidden="true" width="10" height="7" viewBox="0 0 10 7">
+                <path d="M1 1.5l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </button>
+            <ul class="nav__dropdown" id="dropdown-product" role="list">
+              <li><a href="#" class="nav__dropdown-link">Overview</a></li>
+              <li><a href="#" class="nav__dropdown-link">Pricing</a></li>
+              <li><a href="#" class="nav__dropdown-link">Marketplace</a></li>
+              <li><a href="#" class="nav__dropdown-link">Features</a></li>
+              <li><a href="#" class="nav__dropdown-link">Integrations</a></li>
+            </ul>
+          </li>
+
+          <li class="nav__item nav__item--dropdown">
+            <button
+              class="nav__trigger"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="dropdown-company"
+            >
+              Company
+              <svg class="nav__chevron" aria-hidden="true" width="10" height="7" viewBox="0 0 10 7">
+                <path d="M1 1.5l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </button>
+            <ul class="nav__dropdown" id="dropdown-company" role="list">
+              <li><a href="#" class="nav__dropdown-link">About</a></li>
+              <li><a href="#" class="nav__dropdown-link">Team</a></li>
+              <li><a href="#" class="nav__dropdown-link">Blog</a></li>
+              <li><a href="#" class="nav__dropdown-link">Careers</a></li>
+            </ul>
+          </li>
+
+          <li class="nav__item nav__item--dropdown">
+            <button
+              class="nav__trigger"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="dropdown-connect"
+            >
+              Connect
+              <svg class="nav__chevron" aria-hidden="true" width="10" height="7" viewBox="0 0 10 7">
+                <path d="M1 1.5l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </button>
+            <ul class="nav__dropdown" id="dropdown-connect" role="list">
+              <li><a href="#" class="nav__dropdown-link">Contact</a></li>
+              <li><a href="#" class="nav__dropdown-link">Newsletter</a></li>
+              <li><a href="#" class="nav__dropdown-link">LinkedIn</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Desktop CTA -->
+        <div class="nav__cta">
+          <button class="btn btn--ghost-white">Login</button>
+          <button class="btn btn--white">Sign Up</button>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button
+          class="nav__hamburger"
+          id="hamburgerBtn"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          <span class="nav__hamburger-bar"></span>
+          <span class="nav__hamburger-bar"></span>
+          <span class="nav__hamburger-bar"></span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- ===================== MOBILE MENU ===================== -->
+    <div
+      class="mobile-menu"
+      id="mobileMenu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Mobile navigation"
+      hidden
+    >
+      <div class="mobile-menu__overlay" id="menuOverlay" aria-hidden="true"></div>
+      <nav class="mobile-menu__panel" aria-label="Mobile navigation links">
+        <button class="mobile-menu__close" id="closeMenuBtn" aria-label="Close navigation menu">
+          <svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true">
+            <path d="M1 1l13 13M14 1L1 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <ul class="mobile-menu__list" role="list">
+          <li class="mobile-menu__item">
+            <button class="mobile-menu__trigger" aria-expanded="false" aria-controls="mob-product">
+              Product
+              <svg class="mobile-menu__chevron" aria-hidden="true" width="10" height="7" viewBox="0 0 10 7">
+                <path d="M1 1.5l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </button>
+            <ul class="mobile-menu__submenu" id="mob-product" role="list" hidden>
+              <li><a href="#" class="mobile-menu__link">Overview</a></li>
+              <li><a href="#" class="mobile-menu__link">Pricing</a></li>
+              <li><a href="#" class="mobile-menu__link">Marketplace</a></li>
+              <li><a href="#" class="mobile-menu__link">Features</a></li>
+              <li><a href="#" class="mobile-menu__link">Integrations</a></li>
+            </ul>
+          </li>
+
+          <li class="mobile-menu__item">
+            <button class="mobile-menu__trigger" aria-expanded="false" aria-controls="mob-company">
+              Company
+              <svg class="mobile-menu__chevron" aria-hidden="true" width="10" height="7" viewBox="0 0 10 7">
+                <path d="M1 1.5l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </button>
+            <ul class="mobile-menu__submenu" id="mob-company" role="list" hidden>
+              <li><a href="#" class="mobile-menu__link">About</a></li>
+              <li><a href="#" class="mobile-menu__link">Team</a></li>
+              <li><a href="#" class="mobile-menu__link">Blog</a></li>
+              <li><a href="#" class="mobile-menu__link">Careers</a></li>
+            </ul>
+          </li>
+
+          <li class="mobile-menu__item">
+            <button class="mobile-menu__trigger" aria-expanded="false" aria-controls="mob-connect">
+              Connect
+              <svg class="mobile-menu__chevron" aria-hidden="true" width="10" height="7" viewBox="0 0 10 7">
+                <path d="M1 1.5l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </button>
+            <ul class="mobile-menu__submenu" id="mob-connect" role="list" hidden>
+              <li><a href="#" class="mobile-menu__link">Contact</a></li>
+              <li><a href="#" class="mobile-menu__link">Newsletter</a></li>
+              <li><a href="#" class="mobile-menu__link">LinkedIn</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="mobile-menu__cta">
+          <button class="btn btn--full btn--ghost-dark">Login</button>
+          <button class="btn btn--full btn--primary">Sign Up</button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main id="main-content">
+
+      <!-- HERO SECTION -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero__content">
+          <h1 class="hero__heading" id="hero-heading">
+            A modern publishing<br />platform
+          </h1>
+          <p class="hero__subheading">
+            Grow your audience and build your online brand<br />whatever your story
+          </p>
+          <div class="hero__actions">
+            <button class="btn btn--white">Start for Free</button>
+            <button class="btn btn--outline-white">Learn More</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- FUTURE SECTION -->
+      <section class="section section--future" aria-labelledby="future-heading">
+        <div class="container">
+          <h2 class="section__title" id="future-heading">Designed for the future</h2>
+          <div class="future__grid">
+
+            <div class="future__content reveal" data-reveal="fade-up">
+              <article class="feature">
+                <h3 class="feature__title">Introducing an extensible editor</h3>
+                <p class="feature__body">
+                  Blogr features an exceedingly intuitive interface which lets you focus on one
+                  thing: creating content. The editor supports management of multiple blogs and
+                  allows easy manipulation of embeds such as images, videos, and Markdown.
+                  Extensibility with an extensive list of plugins and themes, and fully open
+                  source for those who prefer to add their own functionality.
+                </p>
+              </article>
+
+              <article class="feature">
+                <h3 class="feature__title">Robust content management</h3>
+                <p class="feature__body">
+                  Flexible content management enables users to easily move through posts.
+                  Increase the usability of your blog by adding customized categories, sections,
+                  format, or flow. With this functionality, you're in full control.
+                </p>
+              </article>
+            </div>
+
+            <div class="future__visual reveal" data-reveal="fade-left" aria-hidden="true">
+              <div class="phones-mockup">
+                <div class="phone phone--large">
+                  <div class="phone__screen">
+                    <div class="phone__line phone__line--w70"></div>
+                    <div class="phone__line phone__line--w45"></div>
+                    <div class="phone__line phone__line--w80"></div>
+                    <div class="phone__line phone__line--w35"></div>
+                    <div class="phone__line phone__line--w60"></div>
+                    <div class="phone__line phone__line--w50"></div>
+                    <div class="phone__line phone__line--w75"></div>
+                  </div>
+                </div>
+                <div class="phone phone--small">
+                  <div class="phone__screen">
+                    <div class="phone__line phone__line--w70"></div>
+                    <div class="phone__line phone__line--w45"></div>
+                    <div class="phone__line phone__line--w60"></div>
+                    <div class="phone__line phone__line--w35"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- INFRASTRUCTURE SECTION -->
+      <section class="section section--infra" aria-labelledby="infra-heading">
+        <div class="container container--infra">
+
+          <div class="infra__visual reveal" data-reveal="fade-right" aria-hidden="true">
+            <div class="orbit" role="img" aria-label="Animated orbit illustration">
+              <div class="orbit__ring orbit__ring--outer">
+                <div class="orbit__dot orbit__dot--red"></div>
+              </div>
+              <div class="orbit__ring orbit__ring--mid">
+                <div class="orbit__dot orbit__dot--coral"></div>
+              </div>
+              <div class="orbit__core">
+                <span class="orbit__icon">☁</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="infra__content reveal" data-reveal="fade-up">
+            <h2 class="infra__heading" id="infra-heading">
+              State of the Art<br />Infrastructure
+            </h2>
+            <p class="infra__body">
+              With reliability and speed in mind, worldwide data centers provide the backbone
+              for ultra-fast connectivity. This ensures your site will load instantly, no matter
+              where your readers are, keeping your site competitive.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FREE / OPEN / SIMPLE SECTION -->
+      <section class="section section--open" aria-labelledby="open-heading">
+        <div class="container">
+          <div class="open__grid">
+
+            <div class="open__visual reveal" data-reveal="fade-right" aria-hidden="true">
+              <div class="laptop-mockup">
+                <div class="laptop__screen">
+                  <div class="laptop__topbar">
+                    <span class="laptop__dot"></span>
+                    <span class="laptop__dot"></span>
+                    <span class="laptop__dot"></span>
+                  </div>
+                  <div class="laptop__content">
+                    <div class="laptop__line laptop__line--w70"></div>
+                    <div class="laptop__line laptop__line--w50"></div>
+                    <div class="laptop__line laptop__line--w80"></div>
+                    <div class="laptop__line laptop__line--w40"></div>
+                    <div class="laptop__line laptop__line--w65"></div>
+                    <div class="laptop__line laptop__line--w55"></div>
+                    <div class="laptop__line laptop__line--w75"></div>
+                    <div class="laptop__line laptop__line--w45"></div>
+                  </div>
+                </div>
+                <div class="laptop__base">
+                  <div class="laptop__hinge"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="open__content reveal" data-reveal="fade-left">
+              <h2 class="section__title section__title--left" id="open-heading">
+                Free, open, simple
+              </h2>
+
+              <article class="feature">
+                <h3 class="feature__title">Free for everyone</h3>
+                <p class="feature__body">
+                  Blogr is a free and open platform used by hundreds of thousands of writers to
+                  publish content online. Huge improvements are being made and we hope that
+                  you'll join us.
+                </p>
+              </article>
+
+              <article class="feature">
+                <h3 class="feature__title">Powerful tooling</h3>
+                <p class="feature__body">
+                  Batteries included. We built a simple and straightforward CLI tool that makes
+                  customization and deployment a breeze, but capable of producing even the most
+                  complicated sites.
+                </p>
+              </article>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="container container--footer">
+
+        <div class="footer__brand">
+          <a href="#" class="footer__logo" aria-label="Blogr home">Blogr</a>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <div class="footer__col">
+            <h3 class="footer__heading">Product</h3>
+            <ul class="footer__list" role="list">
+              <li><a href="#" class="footer__link">Overview</a></li>
+              <li><a href="#" class="footer__link">Pricing</a></li>
+              <li><a href="#" class="footer__link">Marketplace</a></li>
+              <li><a href="#" class="footer__link">Features</a></li>
+              <li><a href="#" class="footer__link">Integrations</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Company</h3>
+            <ul class="footer__list" role="list">
+              <li><a href="#" class="footer__link">About</a></li>
+              <li><a href="#" class="footer__link">Team</a></li>
+              <li><a href="#" class="footer__link">Blog</a></li>
+              <li><a href="#" class="footer__link">Careers</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Connect</h3>
+            <ul class="footer__list" role="list">
+              <li><a href="#" class="footer__link">Contact</a></li>
+              <li><a href="#" class="footer__link">Newsletter</a></li>
+              <li><a href="#" class="footer__link">LinkedIn</a></li>
+            </ul>
+          </div>
+        </nav>
+
+      </div>
+    </footer>
+
+    <!-- JavaScript: utilities first, then features, then init -->
+    <script src="js/utils.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
