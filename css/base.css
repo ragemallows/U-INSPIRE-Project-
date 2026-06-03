@@ -1,0 +1,222 @@
+/* ==========================================================================
+   BASE.CSS — Design tokens, CSS reset, root variables
+   Architecture: ITCSS (Inverted Triangle CSS)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS — Single source of truth for all values
+   -------------------------------------------------------------------------- */
+:root {
+  /* --- Color Palette --- */
+  --color-red:           #FF525D;
+  --color-red-light:     #FF7A85;
+  --color-red-dark:      #d9414b;
+  --color-coral:         #FF8F70;
+
+  --color-dark-900:      #1f3f5b;   /* very dark blue */
+  --color-dark-800:      #25252d;   /* very dark grayish blue */
+  --color-dark-700:      #2C2D3F;   /* infra section bg */
+  --color-dark-600:      #3F4164;   /* infra section bg accent */
+
+  --color-gray-500:      #4b5862;   /* grayish blue — body text */
+  --color-gray-400:      #7b8084;   /* dark gray — secondary text */
+  --color-gray-100:      #efeff1;   /* light gray — backgrounds */
+  --color-white:         #ffffff;
+
+  /* --- Typography --- */
+  --font-primary:        'Overpass', sans-serif;
+  --font-secondary:      'Ubuntu', sans-serif;
+
+  --text-xs:     0.75rem;    /* 12px */
+  --text-sm:     0.875rem;   /* 14px */
+  --text-base:   0.9375rem;  /* 15px */
+  --text-md:     1rem;       /* 16px */
+  --text-lg:     1.1rem;     /* ~18px */
+  --text-xl:     1.25rem;    /* 20px */
+  --text-2xl:    1.5rem;     /* 24px */
+  --text-3xl:    1.8rem;     /* ~29px */
+  --text-4xl:    2.2rem;     /* ~35px */
+  --text-5xl:    2.75rem;    /* 44px */
+  --text-hero:   3.5rem;     /* 56px */
+
+  --leading-tight:  1.2;
+  --leading-snug:   1.4;
+  --leading-normal: 1.6;
+  --leading-loose:  1.75;
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* --- Spacing scale (4px base) --- */
+  --space-1:   0.25rem;   /* 4px  */
+  --space-2:   0.5rem;    /* 8px  */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+  --space-32:  8rem;      /* 128px */
+
+  /* --- Border radius --- */
+  --radius-sm:    0.25rem;   /* 4px  */
+  --radius-md:    0.5rem;    /* 8px  */
+  --radius-lg:    0.75rem;   /* 12px */
+  --radius-xl:    1rem;      /* 16px */
+  --radius-2xl:   1.25rem;   /* 20px */
+  --radius-pill:  100px;
+  --radius-full:  9999px;
+
+  /* --- Shadows --- */
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-lg:   0 10px 40px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-xl:   0 20px 60px rgba(0, 0, 0, 0.18);
+
+  /* --- Transitions --- */
+  --transition-fast:    150ms ease;
+  --transition-base:    250ms ease;
+  --transition-slow:    400ms ease;
+  --transition-spring:  350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Z-index layers --- */
+  --z-base:    0;
+  --z-raised:  10;
+  --z-overlay: 100;
+  --z-modal:   200;
+  --z-toast:   300;
+  --z-loader:  400;
+
+  /* --- Layout --- */
+  --container-max:    1100px;
+  --container-pad:    clamp(1.5rem, 5vw, 10rem);
+  --header-height:    80px;
+}
+
+/* --------------------------------------------------------------------------
+   2. CSS RESET — Modern, accessible baseline
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--color-gray-500);
+  background-color: var(--color-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent invisible focus on mouse click, keep visible on keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Reduced motion: respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. ACCESSIBILITY UTILITIES
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  padding: var(--space-2) var(--space-6);
+  background: var(--color-dark-800);
+  color: var(--color-white);
+  font-family: var(--font-secondary);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  z-index: var(--z-toast);
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,238 @@
+/* ==========================================================================
+   ANIMATIONS.CSS — Keyframes, scroll reveals, micro-interactions
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. KEYFRAME DEFINITIONS
+   -------------------------------------------------------------------------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Orbit rotation */
+@keyframes orbitRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Floating drift for decorative elements */
+@keyframes floatDrift {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Shimmer for skeleton states */
+@keyframes shimmer {
+  from { background-position: -400px 0; }
+  to   { background-position: 400px 0; }
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO ENTRANCE ANIMATIONS
+   -------------------------------------------------------------------------- */
+.hero__heading {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.hero__subheading {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.30s both;
+}
+
+.hero__actions {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+/* --------------------------------------------------------------------------
+   3. SCROLL REVEAL — Base states (hidden until JS triggers .is-visible)
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* Variant: slide up */
+.reveal[data-reveal="fade-up"] {
+  transform: translateY(32px);
+}
+
+/* Variant: slide left (from right) */
+.reveal[data-reveal="fade-left"] {
+  transform: translateX(32px);
+}
+
+/* Variant: slide right (from left) */
+.reveal[data-reveal="fade-right"] {
+  transform: translateX(-32px);
+}
+
+/* Variant: scale in */
+.reveal[data-reveal="scale"] {
+  transform: scale(0.94);
+}
+
+/* Triggered state — JS adds this class */
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children reveal */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: none; }
+
+/* --------------------------------------------------------------------------
+   4. ORBIT ANIMATION (defined here, applied in components)
+   -------------------------------------------------------------------------- */
+.orbit__ring--outer {
+  animation: orbitRotate 18s linear infinite;
+}
+
+.orbit__ring--mid {
+  animation: orbitRotate 12s linear infinite reverse;
+}
+
+/* Pause animations when element is out of viewport (perf) */
+.orbit[data-paused="true"] .orbit__ring--outer,
+.orbit[data-paused="true"] .orbit__ring--mid {
+  animation-play-state: paused;
+}
+
+/* --------------------------------------------------------------------------
+   5. PHONE MOCKUP FLOAT
+   -------------------------------------------------------------------------- */
+.phone--large {
+  animation: floatDrift 5s ease-in-out infinite;
+}
+
+.phone--small {
+  animation: floatDrift 5s ease-in-out 0.6s infinite;
+}
+
+/* --------------------------------------------------------------------------
+   6. BUTTON RIPPLE EFFECT
+   -------------------------------------------------------------------------- */
+.btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: rippleExpand 0.55s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleExpand {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. NAVIGATION ENTRANCE
+   -------------------------------------------------------------------------- */
+.site-header {
+  animation: fadeDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+/* --------------------------------------------------------------------------
+   8. REDUCED MOTION OVERRIDES
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal[data-reveal],
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .hero__heading,
+  .hero__subheading,
+  .hero__actions,
+  .site-header {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .phone--large,
+  .phone--small {
+    animation: none !important;
+  }
+
+  .orbit__ring--outer,
+  .orbit__ring--mid {
+    animation: none !important;
+  }
+}
